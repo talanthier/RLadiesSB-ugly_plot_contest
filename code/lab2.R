@@ -1,6 +1,7 @@
 library(tidyverse)
 sweaters <- read.csv('data/use_this_data/holiday_sweaters-2020-12-15-clean.csv')
 
+
 # view(sweaters)
 # str(sweaters)
 # 'data.frame':	107 obs. of  9 variables:
@@ -26,19 +27,16 @@ sweaters <- read.csv('data/use_this_data/holiday_sweaters-2020-12-15-clean.csv')
 #       "image_tf" = 'Does it have a major image on it (i.e. something outside of the main pattern)?',
 #       "image_desc" = 'If yes, what is the image?')
 
-# colors_sweaters <- sweaters %>% separate_rows(colors, sep = c(", "))
+sweaters['length_color_string'] <- nchar(sweaters$colors)
 
-# all_colors <- c()
-# for (color_list in sweaters$colors) {
-#   temp_color_list <- str_split(color_list, ', ')
-#   all_colors <- append(all_colors, temp_color_list)
-# }
-# 
-# unique_colors <- unique(sweaters$colors)
-# colors_sweaters <- separate(sweaters, colors, unique_colors, sep = ", ")
+ggplot(sweaters, aes(colors, length_color_string)) +
+  geom_col()
 
-ggplot(sweaters, aes(image_desc, colors)) +
-  geom_raster(aes(fill = sweater)) +
-  labs(x = 'Some useless label 1', y = 'some other useless label')
-
+ggplot(sweaters, aes(image_desc, objects)) +
+  geom_raster(aes(fill = length_color_string), interpolate = TRUE, alpha = 1) +
+  scale_fill_gradient(low="turquoise", high = 'orange', na.value="deeppink1") +
+  labs(x = 'y-axis', 
+       y='x-axis',
+       title = 'What not to do.') +
+  theme(text=element_text(color = 'yellow3', family = 'serif', angle = 1))
 
