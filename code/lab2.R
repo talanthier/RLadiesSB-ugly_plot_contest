@@ -33,10 +33,11 @@ ggplot(sweaters, aes(colors, length_color_string)) +
   geom_col()
 
 ggplot(sweaters, aes(image_desc, objects)) +
-  geom_raster(aes(fill = length_color_string), interpolate = TRUE, alpha = 1) +
-  scale_fill_gradient(low="turquoise", high = 'orange', na.value="deeppink1") +
+  geom_raster(aes(fill = colors), interpolate = TRUE, alpha = 1) +
   labs(x = 'y-axis', 
        y='x-axis',
        title = 'What not to do.') +
-  theme(text=element_text(color = 'yellow3', family = 'serif', angle = 1))
-
+  theme_dark() +
+  theme(text=element_text(color = 'yellow3', family = 'serif', angle = 1),
+        legend.background = element_rect(fill = 'black', colour = 'black'),
+        legend.position = 'bottom')
