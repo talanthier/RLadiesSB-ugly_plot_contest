@@ -29,15 +29,13 @@ sweaters <- read.csv('data/use_this_data/holiday_sweaters-2020-12-15-clean.csv')
 
 sweaters['length_color_string'] <- nchar(sweaters$colors)
 
-ggplot(sweaters, aes(colors, length_color_string)) +
-  geom_col()
-
-ggplot(sweaters, aes(image_desc, objects)) +
-  geom_raster(aes(fill = colors), interpolate = TRUE, alpha = 1) +
+ugly_plot <- ggplot(sweaters, aes(image_desc, objects)) +
+  geom_raster(aes(fill = length_color_string), interpolate = TRUE, alpha = 1) +
   labs(x = 'y-axis', 
        y='x-axis',
        title = 'What not to do.') +
   theme_dark() +
+  scale_fill_gradient2(low = 'blue', high = 'springgreen', mid = 'tan2', na.value = 'deeppink', midpoint = 40) +
   theme(text=element_text(color = 'yellow3', family = 'serif', angle = 1),
         legend.background = element_rect(fill = 'black', colour = 'black'),
         legend.position = 'bottom')
